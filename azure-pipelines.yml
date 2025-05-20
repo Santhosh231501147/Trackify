@@ -1,0 +1,18 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    cd client
+    npm install
+    npm run build
+  displayName: 'Build Trackify React App'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'client/build'
+    ArtifactName: 'trackify-build'
+    publishLocation: 'Container'
